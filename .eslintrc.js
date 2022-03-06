@@ -17,5 +17,6 @@ module.exports = {
     'no-unused-vars': ['error', { argsIgnorePattern: 'next' }],
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
+    strict: 'off',
   },
 };
