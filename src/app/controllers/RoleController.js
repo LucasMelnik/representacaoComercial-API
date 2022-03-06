@@ -1,6 +1,7 @@
 const Role = require('../models/Role');
 
 module.exports = {
+  // LIST ALL ROLES
   async index(req, res) {
     const roles = await Role.findAll();
 
