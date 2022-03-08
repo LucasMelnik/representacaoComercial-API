@@ -8,6 +8,10 @@ class Role extends Model {
       sequelize,
     });
   }
+
+  static associate(models) {
+    this.hasMany(models.User, { foreignKey: 'role_id', as: 'users' });
+  }
 }
 
 module.exports = Role;

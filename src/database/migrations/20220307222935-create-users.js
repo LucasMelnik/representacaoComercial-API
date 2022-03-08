@@ -13,6 +13,31 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      lastname: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      password: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      nickname: {
+        type: Sequelize.STRING,
+      },
+      phone: {
+        type: Sequelize.STRING,
+      },
+      role_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'roles', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
