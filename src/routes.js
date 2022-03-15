@@ -7,6 +7,7 @@ const router = Router();
 router.get('/roles', RoleController.index);
 router.get('/roles/:id', RoleController.show);
 router.post('/roles', RoleController.store);
+router.put('/roles/:id', RoleController.update);
 
 router.get('/users', UserController.index);
 router.post('/users', UserController.store);

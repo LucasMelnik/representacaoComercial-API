@@ -31,4 +31,21 @@ module.exports = {
 
     return res.json(role);
   },
+
+  async update(req, res) {
+    const { id } = req.params;
+    const { name } = req.body;
+
+    const role = await Role.findByPk(id);
+
+    if (!role) {
+      return res.status(400).json({ error: `Not found role by id: ${id}` });
+    }
+
+    role.name = name;
+
+    await role.save();
+
+    return res.json(role);
+  },
 };
