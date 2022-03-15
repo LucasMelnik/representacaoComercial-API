@@ -7,6 +7,18 @@ module.exports = {
     return res.json(roles);
   },
 
+  async show(req, res) {
+    const { id } = req.params;
+
+    const role = await Role.findByPk(id);
+
+    if (!role) {
+      return res.status(400).json({ error: `Not found role by id: ${id}` });
+    }
+
+    return res.json(role);
+  },
+
   async store(req, res) {
     const { name } = req.body;
 

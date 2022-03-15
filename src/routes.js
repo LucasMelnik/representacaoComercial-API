@@ -5,6 +5,7 @@ const UserController = require('./app/controllers/UserController');
 const router = Router();
 
 router.get('/roles', RoleController.index);
+router.get('/roles/:id', RoleController.show);
 router.post('/roles', RoleController.store);
 
 router.get('/users', UserController.index);
