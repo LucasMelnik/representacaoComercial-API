@@ -22,6 +22,10 @@ module.exports = {
   async store(req, res) {
     const { name } = req.body;
 
+    if (!name) {
+      return res.status(400).json({ error: 'Name is required!' });
+    }
+
     const [roleExists] = await Role.findAll({ where: { name } });
     if (roleExists) {
       return res.status(400).json({ error: 'Role already exists!' });
@@ -36,10 +40,18 @@ module.exports = {
     const { id } = req.params;
     const { name } = req.body;
 
-    const role = await Role.findByPk(id);
+    if (!name) {
+      return res.status(400).json({ error: 'Name is required!' });
+    }
 
+    const role = await Role.findByPk(id);
     if (!role) {
       return res.status(400).json({ error: `Not found role by id: ${id}` });
+    }
+
+    const [roleExists] = await Role.findAll({ where: { name } });
+    if (roleExists && roleExists.id !== id) {
+      return res.status(400).json({ error: 'Role already exists!' });
     }
 
     role.name = name;
