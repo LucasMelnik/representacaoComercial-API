@@ -1,4 +1,5 @@
 'use strict';
+
 const { Model, DataTypes } = require('sequelize');
 
 class Product extends Model {
@@ -11,7 +12,7 @@ class Product extends Model {
       cost: DataTypes.DECIMAL,
       comments: DataTypes.TEXT,
       age_id: DataTypes.INTEGER,
-      gender_id: DataTypes.INTEGER
+      gender_id: DataTypes.INTEGER,
     }, {
       sequelize,
       modelName: 'Product',

@@ -9,6 +9,18 @@ module.exports = {
     return res.json(users);
   },
 
+  async show(req, res) {
+    const { id } = req.params;
+
+    const user = await User.findByPk(id);
+
+    if (!user) {
+      return res.status(400).json({ error: `Not found user by id: ${id}.` });
+    }
+
+    return res.json(user);
+  },
+
   async store(req, res) {
     const {
       firstname, lastname, email, password, nickname, phone, role_id,

@@ -14,6 +14,7 @@ router.put('/roles/:id', RoleController.update);
 router.delete('/roles/:id', RoleController.delete);
 
 router.get('/users', UserController.index);
+router.get('/users/:id', UserController.show);
 router.post('/users', UserController.store);
 
 router.get('/genders', GenderController.index);
