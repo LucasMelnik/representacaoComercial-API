@@ -3,6 +3,7 @@ const AgeGroupController = require('./app/controllers/AgeGroupController');
 const GenderController = require('./app/controllers/GenderController');
 const ProductController = require('./app/controllers/ProductController');
 const RoleController = require('./app/controllers/RoleController');
+const SizeController = require('./app/controllers/SizeController');
 const UserController = require('./app/controllers/UserController');
 
 const router = Router();
@@ -27,5 +28,11 @@ router.post('/age_groups', AgeGroupController.store);
 
 router.get('/products', ProductController.index);
 router.post('/products', ProductController.store);
+
+router.get('/sizes', SizeController.index);
+router.get('/sizes/:id', SizeController.show);
+router.post('/sizes', SizeController.store);
+router.put('/sizes/:id', SizeController.update);
+router.delete('/sizes/:id', SizeController.delete);
 
 module.exports = router;
