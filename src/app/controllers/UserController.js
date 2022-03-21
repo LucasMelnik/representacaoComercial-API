@@ -12,7 +12,9 @@ module.exports = {
   async show(req, res) {
     const { id } = req.params;
 
-    const user = await User.findByPk(id);
+    const user = await User.findByPk(id, {
+      include: { association: 'role' },
+    });
 
     if (!user) {
       return res.status(400).json({ error: `Not found user by id: ${id}.` });
@@ -26,9 +28,30 @@ module.exports = {
       firstname, lastname, email, password, nickname, phone, role_id,
     } = req.body;
 
-    const [userExists] = await User.findAll({ where: { email } });
-    if (userExists) {
+    if (!firstname) {
+      return res.status(400).json({ error: 'Firstname is required!' });
+    }
+
+    if (!lastname) {
+      return res.status(400).json({ error: 'Lastname is required!' });
+    }
+
+    if (!email) {
+      return res.status(400).json({ error: 'Email is required!' });
+    }
+
+    if (!password) {
+      return res.status(400).json({ error: 'Password is required!' });
+    }
+
+    const [emailExists] = await User.findAll({ where: { email } });
+    if (emailExists) {
       return res.status(400).json({ error: `User with email ${email} already exists` });
+    }
+
+    const [phoneExists] = await User.findAll({ where: { phone } });
+    if (phoneExists) {
+      return res.status(400).json({ error: `User with phone ${phone} alerady exists` });
     }
 
     const user = await User.create({
