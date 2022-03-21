@@ -54,9 +54,7 @@ module.exports = {
       return res.status(400).json({ error: 'Role already exists!' });
     }
 
-    role.name = name;
-
-    await role.save();
+    await role.update({ name });
 
     return res.json(role);
   },
