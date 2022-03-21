@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 
-class Role extends Model {
+class Size extends Model {
   static init(sequelize) {
     super.init({
       name: DataTypes.STRING,
@@ -8,10 +8,6 @@ class Role extends Model {
       sequelize,
     });
   }
-
-  static associate(models) {
-    this.hasMany(models.User, { foreignKey: 'role_id', as: 'users' });
-  }
 }
 
-module.exports = Role;
+module.exports = Size;
