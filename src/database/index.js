@@ -6,6 +6,7 @@ const User = require('../app/models/User');
 const AgeGroup = require('../app/models/AgeGroup');
 const Gender = require('../app/models/Gender');
 const Product = require('../app/models/Product');
+const Size = require('../app/models/Size');
 
 const connection = new Sequelize(dbConfig);
 
@@ -14,6 +15,7 @@ User.init(connection);
 AgeGroup.init(connection);
 Gender.init(connection);
 Product.init(connection);
+Size.init(connection);
 
 Role.associate(connection.models);
 User.associate(connection.models);
