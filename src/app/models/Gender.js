@@ -1,10 +1,11 @@
 'use strict';
+
 const { Model, DataTypes } = require('sequelize');
 
 class Gender extends Model {
-  static init(sequelize){
+  static init(sequelize) {
     super.init({
-      name: DataTypes.STRING
+      name: DataTypes.STRING,
     }, {
       sequelize,
       modelName: 'Gender',
