@@ -105,4 +105,18 @@ module.exports = {
 
     return res.json(user);
   },
+
+  async delete(req, res) {
+    const { id } = req.params;
+
+    const user = await User.findByPk(id);
+
+    if (!user) {
+      return res.status(400).json({ error: `Not found user by id: ${id}.` });
+    }
+
+    await user.destroy();
+
+    return res.json(`User ${user.firstname} ${user.lastname} was successfully deleted.`);
+  },
 };
