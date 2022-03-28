@@ -6,6 +6,7 @@ const ProductController = require('./app/controllers/ProductController');
 const RoleController = require('./app/controllers/RoleController');
 const SizeController = require('./app/controllers/SizeController');
 const UserController = require('./app/controllers/UserController');
+
 const { authenticate } = require('./app/middlewares/authMiddleware');
 
 const router = Router();
