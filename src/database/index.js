@@ -7,6 +7,7 @@ const AgeGroup = require('../app/models/AgeGroup');
 const Gender = require('../app/models/Gender');
 const Product = require('../app/models/Product');
 const Size = require('../app/models/Size');
+const RefreshToken = require('../app/models/RefreshToken');
 
 const connection = new Sequelize(dbConfig);
 
@@ -22,5 +23,6 @@ User.associate(connection.models);
 AgeGroup.associate(connection.models);
 Gender.associate(connection.models);
 Product.associate(connection.models);
+// RefreshToken.associate(connection.models);
 
 module.exports = connection;

@@ -1,15 +1,18 @@
 const { Router } = require('express');
 const AgeGroupController = require('./app/controllers/AgeGroupController');
+const AuthController = require('./app/controllers/AuthController');
 const GenderController = require('./app/controllers/GenderController');
 const ProductController = require('./app/controllers/ProductController');
 const RoleController = require('./app/controllers/RoleController');
 const SizeController = require('./app/controllers/SizeController');
 const UserController = require('./app/controllers/UserController');
 
+const { authenticate } = require('./app/middlewares/authMiddleware');
+
 const router = Router();
 
-// Roles
-router.get('/roles', RoleController.index);
+// ROLES
+router.get('/roles', authenticate, RoleController.index);
 router.get('/roles/:id', RoleController.show);
 router.post('/roles', RoleController.store);
 router.put('/roles/:id', RoleController.update);
@@ -21,6 +24,9 @@ router.get('/users/:id', UserController.show);
 router.post('/users', UserController.store);
 router.put('/users/:id', UserController.update);
 router.delete('/users/:id', UserController.delete);
+
+// AUTHENTICATION
+router.post('/auth', AuthController.authenticate);
 
 // GENDERS
 router.get('/genders', GenderController.index);
