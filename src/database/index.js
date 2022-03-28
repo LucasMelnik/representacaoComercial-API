@@ -17,12 +17,13 @@ AgeGroup.init(connection);
 Gender.init(connection);
 Product.init(connection);
 Size.init(connection);
+RefreshToken.init(connection);
 
 Role.associate(connection.models);
 User.associate(connection.models);
 AgeGroup.associate(connection.models);
 Gender.associate(connection.models);
 Product.associate(connection.models);
-// RefreshToken.associate(connection.models);
+RefreshToken.associate(connection.models);
 
 module.exports = connection;
