@@ -427,6 +427,11 @@
     "es5-ext" "^0.10.50"
     "type" "^1.0.1"
 
+"dayjs@^1.11.0":
+  "integrity" "sha512-JLC809s6Y948/FuCZPm5IX8rRhQwOiyMb2TfVVQEixG7P8Lm/gt5S7yoQZmC8x1UehI9Pb7sksEt4xx14m+7Ug=="
+  "resolved" "https://registry.npmjs.org/dayjs/-/dayjs-1.11.0.tgz"
+  "version" "1.11.0"
+
 "debug@^2.6.9", "debug@2.6.9":
   "integrity" "sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA=="
   "resolved" "https://registry.npmjs.org/debug/-/debug-2.6.9.tgz"

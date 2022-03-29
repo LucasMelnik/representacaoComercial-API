@@ -2,7 +2,7 @@
 
 module.exports = {
   up(queryInterface, Sequelize) {
-    return queryInterface.createTable('refresh_token', {
+    return queryInterface.createTable('refresh_tokens', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -15,10 +15,18 @@ module.exports = {
       user_id: {
         type: Sequelize.INTEGER,
       },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
     });
   },
 
   down(queryInterface) {
-    return queryInterface.dropTable('refresh_token');
+    return queryInterface.dropTable('refresh_tokens');
   },
 };

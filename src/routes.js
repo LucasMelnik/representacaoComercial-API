@@ -3,6 +3,7 @@ const AgeGroupController = require('./app/controllers/AgeGroupController');
 const AuthController = require('./app/controllers/AuthController');
 const GenderController = require('./app/controllers/GenderController');
 const ProductController = require('./app/controllers/ProductController');
+const RefreshTokenController = require('./app/controllers/RefreshTokenController');
 const RoleController = require('./app/controllers/RoleController');
 const SizeController = require('./app/controllers/SizeController');
 const UserController = require('./app/controllers/UserController');
@@ -27,6 +28,7 @@ router.delete('/users/:id', UserController.delete);
 
 // AUTHENTICATION
 router.post('/auth', AuthController.authenticate);
+router.post('/refresh-token', RefreshTokenController.handle);
 
 // GENDERS
 router.get('/genders', GenderController.index);

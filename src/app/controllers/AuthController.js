@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs/dist/bcrypt');
-const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const GenerateRefreshToken = require('../provider/GenerateRefreshToken');
+const GenerateToken = require('../provider/GenerateToken');
 
 module.exports = {
   async authenticate(req, res) {
@@ -18,14 +19,16 @@ module.exports = {
       return res.sendStatus(401);
     }
 
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET_TOKEN, { expiresIn: '30s' });
-
     const userId = user.id;
+
+    const token = await GenerateToken.execute(userId);
+    const refreshToken = await GenerateRefreshToken.execute(userId);
 
     return res.json({
       userId,
       email,
       token,
+      refreshToken,
     });
   },
 };
