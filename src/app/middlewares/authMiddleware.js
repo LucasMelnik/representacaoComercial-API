@@ -11,11 +11,10 @@ module.exports = {
     const token = authorization.replace('Bearer', '').trim();
 
     try {
-      const data = jwt.verify(token, process.env.JWT_SECRET_TOKEN);
+      jwt.verify(token, process.env.JWT_SECRET_TOKEN);
 
-      const { id } = data;
-
-      res.userId = id;
+      const { id } = jwt.decode(token);
+      req.userId = Number(id);
 
       return next();
     } catch (err) {

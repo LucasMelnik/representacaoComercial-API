@@ -3,7 +3,6 @@ const User = require('../models/User');
 module.exports = {
   async index(req, res) {
     const users = await User.findAll({
-      include: { association: 'role' },
     });
 
     return res.json(users);
@@ -12,9 +11,7 @@ module.exports = {
   async show(req, res) {
     const { id } = req.params;
 
-    const user = await User.findByPk(id, {
-      include: { association: 'role' },
-    });
+    const user = await User.findByPk(id);
 
     if (!user) {
       return res.status(400).json({ error: `Not found user by id: ${id}.` });
@@ -25,7 +22,7 @@ module.exports = {
 
   async store(req, res) {
     const {
-      firstname, lastname, email, password, nickname, phone, role_id,
+      firstname, lastname, email, password, nickname, phone,
     } = req.body;
 
     if (!firstname) {
@@ -55,7 +52,7 @@ module.exports = {
     }
 
     const user = await User.create({
-      firstname, lastname, email, password, nickname, phone, role_id,
+      firstname, lastname, email, password, nickname, phone,
     });
 
     return res.json(user);
@@ -65,7 +62,7 @@ module.exports = {
     const { id } = req.params;
     const idToNumber = Number(id);
     const {
-      firstname, lastname, email, password, nickname, phone, role_id,
+      firstname, lastname, email, password, nickname, phone,
     } = req.body;
 
     if (!firstname) {
@@ -100,7 +97,7 @@ module.exports = {
     }
 
     await user.update({
-      firstname, lastname, email, password, nickname, phone, role_id,
+      firstname, lastname, email, password, nickname, phone,
     });
 
     return res.json(user);
