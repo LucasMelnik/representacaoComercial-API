@@ -6,6 +6,8 @@ const User = require('../app/models/User');
 const AgeGroup = require('../app/models/AgeGroup');
 const Gender = require('../app/models/Gender');
 const Product = require('../app/models/Product');
+const ProductPrice = require('../app/models/ProductPrice');
+const Commission = require('../app/models/Commission');
 
 const connection = new Sequelize(dbConfig);
 
@@ -14,11 +16,16 @@ User.init(connection);
 AgeGroup.init(connection);
 Gender.init(connection);
 Product.init(connection);
+Commission.init(connection);
+ProductPrice.init(connection);
+
 
 Role.associate(connection.models);
 User.associate(connection.models);
 AgeGroup.associate(connection.models);
 Gender.associate(connection.models);
 Product.associate(connection.models);
+Commission.associate(connection.models);
+ProductPrice.associate(connection.models);
 
 module.exports = connection;
