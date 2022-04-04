@@ -69,7 +69,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      cep: {
+      zip: {
         type: Sequelize.STRING,
         allowNull: true,
       },

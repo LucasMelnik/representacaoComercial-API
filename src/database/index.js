@@ -30,6 +30,5 @@ Gender.associate(connection.models);
 Product.associate(connection.models);
 RefreshToken.associate(connection.models);
 Permission.associate(connection.models);
-Customer.associate(connection.models);
 
 module.exports = connection;
