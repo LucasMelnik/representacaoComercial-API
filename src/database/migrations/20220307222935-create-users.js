@@ -1,3 +1,6 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable lines-around-directive */
+/* eslint-disable linebreak-style */
 'use strict';
 
 module.exports = {

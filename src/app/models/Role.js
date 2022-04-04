@@ -10,7 +10,8 @@ class Role extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.User, { foreignKey: 'role_id', as: 'users' });
+    this.belongsToMany(models.User, { foreignKey: 'role_id', through: 'user_roles', as: 'users' });
+    this.belongsToMany(models.Permission, { foreignKey: 'role_id', through: 'role_permissions', as: 'permissions' });
   }
 }
 
