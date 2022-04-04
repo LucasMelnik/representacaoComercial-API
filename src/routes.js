@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 const { Router } = require('express');
 const AgeGroupController = require('./app/controllers/AgeGroupController');
 const AuthController = require('./app/controllers/AuthController');
@@ -10,6 +11,8 @@ const RolePermissionController = require('./app/controllers/RolePermissionContro
 const SizeController = require('./app/controllers/SizeController');
 const UserAccessControllController = require('./app/controllers/UserAccessControllController');
 const UserController = require('./app/controllers/UserController');
+const CustomerController = require('./app/controllers/CustomerController');
+const Payment_ConditionsController = require('./app/controllers/Payment_ConditionsController');
 
 // TODO: CREATE PERMISSIONS
 // TODO: SET PERMISSIONS AT ROUTES
@@ -67,5 +70,17 @@ router.get('/sizes/:id', SizeController.show);
 router.post('/sizes', SizeController.store);
 router.put('/sizes/:id', SizeController.update);
 router.delete('/sizes/:id', SizeController.delete);
+
+router.get('/customer', CustomerController.index);
+router.get('/customer/:id', CustomerController.show);
+router.post('/customer', CustomerController.store);
+router.put('/customer/:id', CustomerController.update);
+router.delete('/customer/:id', CustomerController.delete);
+
+router.get('/payment_conditions', Payment_ConditionsController.index);
+router.get('/payment_conditions/:id', Payment_ConditionsController.show);
+router.post('/payment_conditions', Payment_ConditionsController.store);
+router.put('/payment_conditions/:id', Payment_ConditionsController.update);
+router.delete('/payment_conditions/:id', Payment_ConditionsController.delete);
 
 module.exports = router;
