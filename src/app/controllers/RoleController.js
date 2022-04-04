@@ -13,7 +13,7 @@ module.exports = {
     const role = await Role.findByPk(id);
 
     if (!role) {
-      return res.status(400).json({ error: `Not found role by id: ${id}.` });
+      return res.status(400).json({ error: `Not found role by id: ${id}` });
     }
 
     return res.json(role);
@@ -46,7 +46,7 @@ module.exports = {
 
     const role = await Role.findByPk(id);
     if (!role) {
-      return res.status(400).json({ error: `Not found role by id: ${id}.` });
+      return res.status(400).json({ error: `Not found role by id: ${id}` });
     }
 
     const [roleExists] = await Role.findAll({ where: { name } });
@@ -54,9 +54,7 @@ module.exports = {
       return res.status(400).json({ error: 'Role already exists!' });
     }
 
-    role.name = name;
-
-    await role.save();
+    await role.update({ name });
 
     return res.json(role);
   },
