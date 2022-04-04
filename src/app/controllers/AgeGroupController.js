@@ -9,20 +9,20 @@ module.exports = {
 
   async store(req, res) {
     const {
-      name
+      name,
     } = req.body;
 
     if (!name) {
       return res.status(400).json({ error: 'Name is required!' });
     }
 
-    const [ageGroupExists] = await AgeGroup.findOne({ where: { name } });
+    const [ageGroupExists] = await AgeGroup.findAll({ where: { name } });
     if (ageGroupExists) {
       return res.status(400).json({ error: `Age Group ${name} already exists` });
     }
 
     const ageGroup = await AgeGroup.create({
-      name
+      name,
     });
 
     return res.json(ageGroup);
@@ -50,12 +50,12 @@ module.exports = {
 
     const ageGroup = await AgeGroup.findByPk(id);
     if (!ageGroup) {
-      return res.status(400).json({ error: `Not found ageGroup by id: ${id}.` });
+      return res.status(400).json({ error: `Not found Age group by id: ${id}.` });
     }
 
-    const [ageGroupExists] = await AgeGroup.findOne({ where: { name } });
+    const [ageGroupExists] = await AgeGroup.findAll({ where: { name } });
     if (ageGroupExists && ageGroupExists.id !== id) {
-      return res.status(400).json({ error: 'AgeGroup already exists!' });
+      return res.status(400).json({ error: 'Age group already exists!' });
     }
 
     ageGroup.name = name;
@@ -76,7 +76,6 @@ module.exports = {
 
     await ageGroup.destroy();
 
-    return res.json(`AgeGroup ${ageGroup.name} was successfully deleted.`);
+    return res.json(`Age group ${ageGroup.name} was successfully deleted.`);
   },
 };
-

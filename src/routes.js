@@ -27,6 +27,7 @@ router.get('/roles/:id', RoleController.show);
 router.post('/roles', RoleController.store);
 router.put('/roles/:id', RoleController.update);
 router.delete('/roles/:id', RoleController.delete);
+
 // ROLES PERMISSION
 router.post('/roles/:id/permissions', authenticate, is('REPRESENTANTE'), RolePermissionController.add);
 router.delete('/roles/:id/permissions', authenticate, is(['REPRESENTANTE']), RolePermissionController.remove);
@@ -57,8 +58,11 @@ router.get('/genders', GenderController.index);
 router.post('/genders', GenderController.store);
 
 // AGE GROUPS
-router.get('/age_groups', AgeGroupController.index);
-router.post('/age_groups', AgeGroupController.store);
+router.get('/age-groups', AgeGroupController.index);
+router.get('/age-groups/:id', AgeGroupController.show);
+router.post('/age-groups', AgeGroupController.store);
+router.put('/age-groups/:id', AgeGroupController.update);
+router.delete('/age-groups/:id', AgeGroupController.delete);
 
 // PRODUCTS
 router.get('/products', ProductController.index);
@@ -71,12 +75,14 @@ router.post('/sizes', SizeController.store);
 router.put('/sizes/:id', SizeController.update);
 router.delete('/sizes/:id', SizeController.delete);
 
+// CUSTOMERS
 router.get('/customer', CustomerController.index);
 router.get('/customer/:id', CustomerController.show);
 router.post('/customer', CustomerController.store);
 router.put('/customer/:id', CustomerController.update);
 router.delete('/customer/:id', CustomerController.delete);
 
+// PAYMENT CONDITIONS
 router.get('/payment_conditions', Payment_ConditionsController.index);
 router.get('/payment_conditions/:id', Payment_ConditionsController.show);
 router.post('/payment_conditions', Payment_ConditionsController.store);
