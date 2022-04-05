@@ -5,6 +5,8 @@ const AuthController = require('./app/controllers/AuthController');
 const GenderController = require('./app/controllers/GenderController');
 const PermissionController = require('./app/controllers/PermissionController');
 const ProductController = require('./app/controllers/ProductController');
+const CommissionController = require('./app/controllers/CommissionController');
+const ProductPriceController = require('./app/controllers/ProductPriceController');
 const RefreshTokenController = require('./app/controllers/RefreshTokenController');
 const RoleController = require('./app/controllers/RoleController');
 const RolePermissionController = require('./app/controllers/RolePermissionController');
@@ -55,7 +57,10 @@ router.post('/refresh-token', RefreshTokenController.handle);
 
 // GENDERS
 router.get('/genders', GenderController.index);
+router.get('/genders/:id', GenderController.show);
 router.post('/genders', GenderController.store);
+router.put('/genders/:id', GenderController.update);
+router.delete('/genders/:id', GenderController.delete);
 
 // AGE GROUPS
 router.get('/age-groups', AgeGroupController.index);
@@ -66,7 +71,24 @@ router.delete('/age-groups/:id', AgeGroupController.delete);
 
 // PRODUCTS
 router.get('/products', ProductController.index);
+router.get('/products/:id', ProductController.show);
 router.post('/products', ProductController.store);
+router.put('/products/:id', ProductController.update);
+router.delete('/products/:id', ProductController.delete);
+
+// COMMISSIONS
+router.get('/commissions', CommissionController.index);
+router.get('/commissions/:id', CommissionController.show);
+router.post('/commissions', CommissionController.store);
+router.put('/commissions/:id', CommissionController.update);
+router.delete('/commissions/:id', CommissionController.delete);
+
+// PRODUCT PRICES
+router.get('/product_prices', ProductPriceController.index);
+router.get('/product_prices/:id', ProductPriceController.show);
+router.post('/product_prices', ProductPriceController.store);
+router.put('/product_prices/:id', ProductPriceController.update);
+router.delete('/product_prices/:id', ProductPriceController.delete);
 
 // SIZES
 router.get('/sizes', SizeController.index);

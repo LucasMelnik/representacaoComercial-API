@@ -3,27 +3,39 @@ const Product = require('../models/Product');
 module.exports = {
   async index(req, res) {
     const products = await Product.findAll({
-      include: ['product', 'ageGroup'],
+      include: ['gender', 'ageGroup'],
     });
 
     return res.json(products);
   },
 
+  // TODO: SET FACTORY NOT ALLOW NULL IN DATABASE
+  // TODO: SET COST NOT ALLOW NULL IN DATABASE
+  // TODO: NOT ALLOW TO CREATE THE SAME PRODUCT (REF, COLOR, FACTORY)
   async store(req, res) {
-    const data = {
-      ref, color, image_path, factory_id, cost, comments, age_id, gender_id
+    const {
+      ref, color, image_path, factory_id, cost, comments, age_id, gender_id,
     } = req.body;
 
-    if (!data.ref) {
+    if (!ref) {
       return res.status(400).json({ error: 'Ref is required!' });
     }
 
-    const [productExists] = await Product.findOne({ where: { ref } });
-    if (productExists) {
-      return res.status(400).json({ error: `Product refence ${ref} already exists` });
+    if (!color) {
+      return res.status(400).json({ error: 'Color is required!' });
     }
 
-    const product = await Product.create(data);
+    if (!factory_id) {
+      return res.status(400).json({ error: 'factory_id is required!' });
+    }
+
+    if (!cost) {
+      return res.status(440).json({ error: 'Cost is required!' });
+    }
+
+    const product = await Product.create({
+      ref, color, image_path, factory_id, cost, comments, age_id, gender_id,
+    });
 
     return res.json(product);
   },
@@ -42,21 +54,24 @@ module.exports = {
 
   async update(req, res) {
     const { id } = req.params;
-    const data = {
-      ref, color, image_path, factory_id, cost, comments, age_id, gender_id
+    const {
+      ref, color, image_path, factory_id, cost, comments, age_id, gender_id,
     } = req.body;
 
-    if (!data.ref) {
+    if (!ref) {
       return res.status(400).json({ error: 'Ref is required!' });
     }
-    if (!data.color) {
-      return res.status(400).json({ error: 'Ref is required!' });
+
+    if (!color) {
+      return res.status(400).json({ error: 'Color is required!' });
     }
-    if (!data.factory_id) {
-      return res.status(400).json({ error: 'Ref is required!' });
+
+    if (!factory_id) {
+      return res.status(400).json({ error: 'factory_id is required!' });
     }
-    if (!data.age_id) {
-      return res.status(400).json({ error: 'Ref is required!' });
+
+    if (!cost) {
+      return res.status(440).json({ error: 'Cost is required!' });
     }
 
     const product = await Product.findByPk(id);
@@ -64,14 +79,9 @@ module.exports = {
       return res.status(400).json({ error: `Not found product by id: ${id}.` });
     }
 
-    const [productExists] = await Product.findOne({ where: { name } });
-    if (productExists && productExists.id !== id) {
-      return res.status(400).json({ error: 'Product already exists!' });
-    }
-
-    product.ref = name;
-
-    await product.save();
+    await product.update({
+      ref, color, image_path, factory_id, cost, comments, age_id, gender_id,
+    });
 
     return res.json(product);
   },
@@ -90,4 +100,3 @@ module.exports = {
     return res.json(`Product ${product.ref} was successfully deleted.`);
   },
 };
-
