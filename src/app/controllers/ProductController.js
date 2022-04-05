@@ -11,7 +11,6 @@ module.exports = {
 
   // TODO: SET FACTORY NOT ALLOW NULL IN DATABASE
   // TODO: SET COST NOT ALLOW NULL IN DATABASE
-  // TODO: NOT ALLOW TO CREATE THE SAME PRODUCT (REF, COLOR, FACTORY)
   async store(req, res) {
     const {
       ref, color, image_path, factory_id, cost, comments, age_id, gender_id,
@@ -29,8 +28,21 @@ module.exports = {
       return res.status(400).json({ error: 'factory_id is required!' });
     }
 
+    if (!age_id) {
+      return res.status(400).json({ error: 'age_id is required!' });
+    }
+    
+    if (!gender_id) {
+      return res.status(400).json({ error: 'gender_id is required!' });
+    }
+
     if (!cost) {
       return res.status(440).json({ error: 'Cost is required!' });
+    }
+
+    const productExists = await Product.findOne({ where: { ref, color, factory_id } });
+    if (productExists) {
+      return res.status(400).json({ error: `Product refence ${ref} with color ${color} from factory ${factory_id} already exists` });
     }
 
     const product = await Product.create({
@@ -70,6 +82,14 @@ module.exports = {
       return res.status(400).json({ error: 'factory_id is required!' });
     }
 
+    if (!age_id) {
+      return res.status(400).json({ error: 'age_id is required!' });
+    }
+    
+    if (!gender_id) {
+      return res.status(400).json({ error: 'gender_id is required!' });
+    }
+
     if (!cost) {
       return res.status(440).json({ error: 'Cost is required!' });
     }
@@ -77,6 +97,10 @@ module.exports = {
     const product = await Product.findByPk(id);
     if (!product) {
       return res.status(400).json({ error: `Not found product by id: ${id}.` });
+    }
+    const productExists = await Product.findOne({ where: { ref, color, factory_id } });
+    if (productExists && productExists.id !== product.id) {
+      return res.status(400).json({ error: `Product refence ${ref} with color ${color} from factory ${factory_id} already exists` });
     }
 
     await product.update({

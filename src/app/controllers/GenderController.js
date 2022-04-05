@@ -15,7 +15,7 @@ module.exports = {
       return res.status(400).json({ error: 'Name is required!' });
     }
 
-    const [genderExists] = await Gender.findOne({ where: { name } });
+    const genderExists = await Gender.findOne({ where: { name } });
     if (genderExists) {
       return res.status(400).json({ error: `Gender ${name} already exists` });
     }
@@ -52,7 +52,7 @@ module.exports = {
       return res.status(400).json({ error: `Not found gender by id: ${id}.` });
     }
 
-    const [genderExists] = await Gender.findOne({ where: { name } });
+    const genderExists = await Gender.findOne({ where: { name } });
     if (genderExists && genderExists.id !== id) {
       return res.status(400).json({ error: 'Gender already exists!' });
     }
