@@ -76,11 +76,11 @@ router.put('/sizes/:id', SizeController.update);
 router.delete('/sizes/:id', SizeController.delete);
 
 // CUSTOMERS
-router.get('/customer', CustomerController.index);
-router.get('/customer/:id', CustomerController.show);
-router.post('/customer', CustomerController.store);
-router.put('/customer/:id', CustomerController.update);
-router.delete('/customer/:id', CustomerController.delete);
+router.get('/customers', CustomerController.index);
+router.get('/customers/:id', CustomerController.show);
+router.post('/customers', CustomerController.store);
+router.put('/customers/:id', CustomerController.update);
+router.delete('/customers/:id', CustomerController.delete);
 
 // PAYMENT CONDITIONS
 router.get('/payment_conditions', Payment_ConditionsController.index);

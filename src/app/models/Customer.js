@@ -4,22 +4,22 @@ const { Model, DataTypes } = require('sequelize');
 class Customer extends Model {
   static init(sequelize) {
     super.init({
-      corporateName: DataTypes.STRING,
-      fantasyName: DataTypes.STRING,
+      corporate_name: DataTypes.STRING,
+      fantasy_name: DataTypes.STRING,
       cnpj: DataTypes.STRING,
-      stateRegistration: DataTypes.STRING,
+      state_registration: DataTypes.STRING,
       buyer: DataTypes.STRING,
       phone: DataTypes.STRING,
       email: DataTypes.STRING,
-      purchaseCredit: DataTypes.FLOAT,
-      customerAddress: DataTypes.STRING,
-      addressNumber: DataTypes.INTEGER,
+      purchase_credit: DataTypes.FLOAT,
+      customer_address: DataTypes.STRING,
+      address_number: DataTypes.INTEGER,
       complement: DataTypes.STRING,
       district: DataTypes.STRING,
       city: DataTypes.STRING,
-      sate: DataTypes.STRING,
+      state: DataTypes.STRING,
       country: DataTypes.STRING,
-      cep: DataTypes.STRING,
+      zip: DataTypes.STRING,
     }, {
       sequelize,
     });
