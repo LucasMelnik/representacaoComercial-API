@@ -1,2 +1,4 @@
 # ENVIRONMENT CONFIGURATIONS
 .env
+node_modules
+.vscode

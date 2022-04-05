@@ -3,7 +3,7 @@ const Product = require('../models/Product');
 module.exports = {
   async index(req, res) {
     const products = await Product.findAll({
-      include: ['product', 'ageGroup'],
+      include: ['gender', 'ageGroup'],
     });
 
     return res.json(products);
