@@ -14,7 +14,7 @@ const SizeController = require('./app/controllers/SizeController');
 const UserAccessControllController = require('./app/controllers/UserAccessControllController');
 const UserController = require('./app/controllers/UserController');
 const CustomerController = require('./app/controllers/CustomerController');
-const Payment_ConditionsController = require('./app/controllers/Payment_ConditionsController');
+const PaymentConditionController = require('./app/controllers/PaymentConditionController');
 
 // TODO: CREATE PERMISSIONS
 // TODO: SET PERMISSIONS AT ROUTES
@@ -105,10 +105,10 @@ router.put('/customers/:id', CustomerController.update);
 router.delete('/customers/:id', CustomerController.delete);
 
 // PAYMENT CONDITIONS
-router.get('/payment_conditions', Payment_ConditionsController.index);
-router.get('/payment_conditions/:id', Payment_ConditionsController.show);
-router.post('/payment_conditions', Payment_ConditionsController.store);
-router.put('/payment_conditions/:id', Payment_ConditionsController.update);
-router.delete('/payment_conditions/:id', Payment_ConditionsController.delete);
+router.get('/payment-condition', PaymentConditionController.index);
+router.get('/payment-condition/:id', PaymentConditionController.show);
+router.post('/payment-condition', PaymentConditionController.store);
+router.put('/payment-condition/:id', PaymentConditionController.update);
+router.delete('/payment-condition/:id', PaymentConditionController.delete);
 
 module.exports = router;

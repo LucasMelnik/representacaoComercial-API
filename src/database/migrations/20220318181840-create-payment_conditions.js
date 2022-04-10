@@ -9,8 +9,16 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
-      condition: {
+      name: {
         type: Sequelize.STRING,
+        allowNull: false,
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
         allowNull: false,
       },
     });

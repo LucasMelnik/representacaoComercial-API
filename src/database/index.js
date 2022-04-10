@@ -12,6 +12,7 @@ const Commission = require('../app/models/Commission');
 const Size = require('../app/models/Size');
 const RefreshToken = require('../app/models/RefreshToken');
 const Permission = require('../app/models/Permission');
+const PaymentCondition = require('../app/models/PaymentCondition');
 
 const connection = new Sequelize(dbConfig);
 
@@ -23,6 +24,7 @@ Gender.init(connection);
 Product.init(connection);
 Commission.init(connection);
 ProductPrice.init(connection);
+PaymentCondition.init(connection);
 
 Size.init(connection);
 RefreshToken.init(connection);
