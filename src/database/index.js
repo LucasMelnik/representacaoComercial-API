@@ -13,6 +13,7 @@ const Size = require('../app/models/Size');
 const RefreshToken = require('../app/models/RefreshToken');
 const Permission = require('../app/models/Permission');
 const PaymentCondition = require('../app/models/PaymentCondition');
+const Factory = require('../app/models/Factory');
 
 const connection = new Sequelize(dbConfig);
 
@@ -25,10 +26,10 @@ Product.init(connection);
 Commission.init(connection);
 ProductPrice.init(connection);
 PaymentCondition.init(connection);
-
 Size.init(connection);
 RefreshToken.init(connection);
 Permission.init(connection);
+Factory.init(connection);
 
 Role.associate(connection.models);
 User.associate(connection.models);

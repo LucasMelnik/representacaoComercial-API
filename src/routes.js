@@ -20,6 +20,7 @@ const PaymentConditionController = require('./app/controllers/PaymentConditionCo
 // TODO: SET PERMISSIONS AT ROUTES
 const { authenticate } = require('./app/middlewares/authMiddleware');
 const { can, is } = require('./app/middlewares/PermissionMiddleware');
+const FactoryController = require('./app/controllers/FactoryController');
 
 const router = Router();
 
@@ -110,5 +111,11 @@ router.get('/payment-condition/:id', PaymentConditionController.show);
 router.post('/payment-condition', PaymentConditionController.store);
 router.put('/payment-condition/:id', PaymentConditionController.update);
 router.delete('/payment-condition/:id', PaymentConditionController.delete);
+
+router.get('/factories', FactoryController.index);
+router.get('/factories/:id', FactoryController.show);
+router.post('/factories', FactoryController.store);
+router.put('/factories/:id', FactoryController.update);
+router.delete('/factories/:id', FactoryController.delete);
 
 module.exports = router;
