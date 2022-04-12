@@ -49,7 +49,7 @@ module.exports = {
       ref, color, image_path, factory_id, cost, comments, age_id, gender_id,
     });
 
-    return res.status(201).json(product);
+    return res.json(product);
   },
 
   async show(req, res) {
@@ -58,7 +58,7 @@ module.exports = {
     const product = await Product.findByPk(id);
 
     if (!product) {
-      return res.status(404).json({ error: `Not found product by id: ${id}.` });
+      return res.status(400).json({ error: `Not found product by id: ${id}.` });
     }
 
     return res.json(product);
@@ -96,7 +96,7 @@ module.exports = {
 
     const product = await Product.findByPk(id);
     if (!product) {
-      return res.status(404).json({ error: `Not found product by id: ${id}.` });
+      return res.status(400).json({ error: `Not found product by id: ${id}.` });
     }
     const productExists = await Product.findOne({ where: { ref, color, factory_id } });
     if (productExists && productExists.id !== product.id) {
@@ -116,7 +116,7 @@ module.exports = {
     const product = await Product.findByPk(id);
 
     if (!product) {
-      return res.status(404).json({ error: `Not found product by id: ${id}.` });
+      return res.status(400).json({ error: `Not found product by id: ${id}.` });
     }
 
     await product.destroy();
