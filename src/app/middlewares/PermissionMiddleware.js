@@ -1,5 +1,6 @@
 const User = require('../models/User');
 
+// TODO: APPLICATION BROKES WHEN TRY TO LIST USERS IF USER IS NOT AUTHENTICATED
 module.exports = {
   can(permissionsRoutes) {
     return async (req, res, next) => {
@@ -43,12 +44,16 @@ module.exports = {
         .map((role) => role.name)
         .some((role) => rolesRoutes.includes(role));
 
+      // if (!userHasRoles) {
+      //   if (!req.userVerified) {
+      //     req.userVerified = true;
+      //   } else {
+      //     return res.status(401).end();
+      //   }
+      // }
+
       if (!userHasRoles) {
-        if (!req.userVerified) {
-          req.userVerified = true;
-        } else {
-          return res.status(401).end();
-        }
+        return res.status(401).end();
       }
 
       return next();

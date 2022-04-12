@@ -18,6 +18,7 @@ const PaymentConditionController = require('./app/controllers/PaymentConditionCo
 
 // TODO: CREATE PERMISSIONS
 // TODO: SET PERMISSIONS AT ROUTES
+// TODO: PROBLEM WITH 'CAN'
 const { authenticate } = require('./app/middlewares/authMiddleware');
 const { can, is } = require('./app/middlewares/PermissionMiddleware');
 const FactoryController = require('./app/controllers/FactoryController');
@@ -36,9 +37,9 @@ router.post('/roles/:id/permissions', authenticate, is('REPRESENTANTE'), RolePer
 router.delete('/roles/:id/permissions', authenticate, is(['REPRESENTANTE']), RolePermissionController.remove);
 
 // USERS
-router.get('/users', is('REPRESENTANTE'), UserController.index);
+router.get('/users', authenticate, is('REPRESENTANTE'), UserController.index);
 router.get('/users/:id', UserController.show);
-router.post('/users', authenticate, is('REPRESENTANTE'), can('create_user'), UserController.store);
+router.post('/users', authenticate, is('REPRESENTANTE'), UserController.store);
 router.put('/users/:id', UserController.update);
 router.delete('/users/:id', UserController.delete);
 // USER ACCESS CONTROLL
