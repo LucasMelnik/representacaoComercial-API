@@ -6,8 +6,7 @@
   "author": "Lucas Melnik <lucas_melnik.99@hotmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "npx nodemon src/index.js",
-    "test": "jest --watchAll"
+    "dev": "npx nodemon src/index.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -23,9 +22,7 @@
     "eslint": "^8.10.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-import-resolver-node": "^0.3.6",
-    "jest": "^27.5.1",
     "nodemon": "^2.0.15",
-    "sequelize-cli": "^6.4.1",
-    "supertest": "^6.2.2"
+    "sequelize-cli": "^6.4.1"
   }
 }
