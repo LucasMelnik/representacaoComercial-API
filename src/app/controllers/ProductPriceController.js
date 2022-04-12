@@ -3,22 +3,26 @@ const ProductPrice = require('../models/ProductPrice');
 module.exports = {
   async index(req, res) {
     const productPrices = await ProductPrice.findAll({
-      include: ['paymentCondition', 'product', 'commission'],
+      include: ['payment_condition', 'product', 'commission'],
     });
 
     return res.json(productPrices);
   },
 
+  // TODO: VERIFY IF ATRIBUTES EXISTS BEFORE CREATE OR UPDATE
+  // TODO: VERIFY IF PRODUCT PRICE ALREADY EXISTS BEFORE CREATE OR UPDATE
   async store(req, res) {
-    const data = {
-      price, payment_condition_id, product_id, commission_id
+    const {
+      price, payment_condition_id, product_id, commission_id,
     } = req.body;
 
-    if (!data.price) {
+    if (!price) {
       return res.status(400).json({ error: 'Price is required!' });
     }
 
-    const productPrice = await ProductPrice.create(data);
+    const productPrice = await ProductPrice.create({
+      price, payment_condition_id, product_id, commission_id,
+    });
 
     return res.json(productPrice);
   },
@@ -37,11 +41,11 @@ module.exports = {
 
   async update(req, res) {
     const { id } = req.params;
-    const data = {
-      price, payment_condition_id, product_id, commission_id
+    const {
+      price, payment_condition_id, product_id, commission_id,
     } = req.body;
 
-    if (!data.price) {
+    if (!price) {
       return res.status(400).json({ error: 'Price is required!' });
     }
 
@@ -50,12 +54,9 @@ module.exports = {
       return res.status(400).json({ error: `Not found productPrice by id: ${id}.` });
     }
 
-    productPrice.price = data.price;
-    productPrice.payment_condition_id = data.payment_condition_id;
-    productPrice.product_id = data.product_id;
-    productPrice.commission_id = data.commission_id;
-    
-    await productPrice.save();
+    await productPrice.update({
+      price, payment_condition_id, product_id, commission_id,
+    });
 
     return res.json(productPrice);
   },
@@ -71,7 +72,6 @@ module.exports = {
 
     await productPrice.destroy();
 
-    return res.json(`ProductPrice ${productPrice.price} was successfully deleted.`);
+    return res.json(`ProductPrice ${productPrice.id} was successfully deleted.`);
   },
 };
-

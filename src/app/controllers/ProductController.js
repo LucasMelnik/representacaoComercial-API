@@ -3,14 +3,14 @@ const Product = require('../models/Product');
 module.exports = {
   async index(req, res) {
     const products = await Product.findAll({
-      include: ['gender', 'ageGroup'],
+      include: ['gender', 'ageGroup', 'factory'],
     });
 
     return res.json(products);
   },
 
   // TODO: SET FACTORY NOT ALLOW NULL IN DATABASE
-  // TODO: SET COST NOT ALLOW NULL IN DATABASE
+  // TODO: VERIFY IF FACTORY, AGE GROUP AND GENDER EXISTS BEFORE TRY TO CREATE UR UPDATE A PRODUCT
   async store(req, res) {
     const {
       ref, color, image_path, factory_id, cost, comments, age_id, gender_id,
@@ -31,13 +31,9 @@ module.exports = {
     if (!age_id) {
       return res.status(400).json({ error: 'age_id is required!' });
     }
-    
+
     if (!gender_id) {
       return res.status(400).json({ error: 'gender_id is required!' });
-    }
-
-    if (!cost) {
-      return res.status(440).json({ error: 'Cost is required!' });
     }
 
     const productExists = await Product.findOne({ where: { ref, color, factory_id } });
@@ -55,7 +51,9 @@ module.exports = {
   async show(req, res) {
     const { id } = req.params;
 
-    const product = await Product.findByPk(id);
+    const product = await Product.findByPk(id, {
+      include: ['gender', 'ageGroup', 'factory'],
+    });
 
     if (!product) {
       return res.status(400).json({ error: `Not found product by id: ${id}.` });
@@ -85,13 +83,9 @@ module.exports = {
     if (!age_id) {
       return res.status(400).json({ error: 'age_id is required!' });
     }
-    
+
     if (!gender_id) {
       return res.status(400).json({ error: 'gender_id is required!' });
-    }
-
-    if (!cost) {
-      return res.status(440).json({ error: 'Cost is required!' });
     }
 
     const product = await Product.findByPk(id);
@@ -121,6 +115,6 @@ module.exports = {
 
     await product.destroy();
 
-    return res.json(`Product ${product.ref} was successfully deleted.`);
+    return res.json(`Product ${product.id} was successfully deleted.`);
   },
 };

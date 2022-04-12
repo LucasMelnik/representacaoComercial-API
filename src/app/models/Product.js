@@ -11,8 +11,6 @@ class Product extends Model {
       factory_id: DataTypes.INTEGER,
       cost: DataTypes.DECIMAL,
       comments: DataTypes.TEXT,
-      age_id: DataTypes.INTEGER,
-      gender_id: DataTypes.INTEGER,
     }, {
       sequelize,
       modelName: 'Product',
@@ -23,6 +21,8 @@ class Product extends Model {
     // define association here
     this.belongsTo(models.AgeGroup, { foreignKey: 'age_id', as: 'ageGroup' });
     this.belongsTo(models.Gender, { foreignKey: 'gender_id', as: 'gender' });
+    this.belongsTo(models.Factory, { foreignKey: 'factory_id', as: 'factory' });
+    this.hasMany(models.ProductPrice, { foreignKey: 'product_id', as: 'product' });
   }
 }
 

@@ -12,6 +12,10 @@ class Factory extends Model {
       sequelize,
     });
   }
+
+  static associate(models) {
+    this.hasMany(models.Product, { foreignKey: 'factory_id', as: 'factory' });
+  }
 }
 
 module.exports = Factory;

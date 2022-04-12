@@ -10,5 +10,9 @@ class PaymentCondition extends Model {
       sequelize,
     });
   }
+
+  static associate(models) {
+    this.hasMany(models.ProductPrice, { foreignKey: 'payment_condition_id', as: 'payment_condition' });
+  }
 }
 module.exports = PaymentCondition;

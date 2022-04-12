@@ -13,7 +13,7 @@ class commission extends Model {
 
   static associate(models) {
     // define association here
-    this.hasMany(models.ProductPrice, { foreignKey: 'commission_id', as: 'productPrices' });
+    this.hasMany(models.ProductPrice, { foreignKey: 'commission_id', as: 'commission' });
   }
 }
 

@@ -40,5 +40,7 @@ Commission.associate(connection.models);
 ProductPrice.associate(connection.models);
 RefreshToken.associate(connection.models);
 Permission.associate(connection.models);
+Factory.associate(connection.models);
+PaymentCondition.associate(connection.models);
 
 module.exports = connection;
