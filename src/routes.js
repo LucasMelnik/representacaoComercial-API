@@ -22,6 +22,7 @@ const PaymentConditionController = require('./app/controllers/PaymentConditionCo
 const { authenticate } = require('./app/middlewares/authMiddleware');
 const { can, is } = require('./app/middlewares/PermissionMiddleware');
 const FactoryController = require('./app/controllers/FactoryController');
+const OrderStatusController = require('./app/controllers/OrderStatusController');
 
 const router = Router();
 
@@ -105,6 +106,13 @@ router.get('/customers/:id', CustomerController.show);
 router.post('/customers', CustomerController.store);
 router.put('/customers/:id', CustomerController.update);
 router.delete('/customers/:id', CustomerController.delete);
+
+// ORDER STATUS
+router.get('/order-status', OrderStatusController.index);
+router.get('/order-status/:id', OrderStatusController.show);
+router.post('/order-status', OrderStatusController.store);
+router.put('/order-status/:id', OrderStatusController.update);
+router.delete('/order-status/:id', OrderStatusController.delete);
 
 // PAYMENT CONDITIONS
 router.get('/payment-condition', PaymentConditionController.index);
