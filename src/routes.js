@@ -23,6 +23,7 @@ const { authenticate } = require('./app/middlewares/authMiddleware');
 const { can, is } = require('./app/middlewares/PermissionMiddleware');
 const FactoryController = require('./app/controllers/FactoryController');
 const OrderStatusController = require('./app/controllers/OrderStatusController');
+const OrderController = require('./app/controllers/OrderController');
 
 const router = Router();
 
@@ -106,6 +107,13 @@ router.get('/customers/:id', CustomerController.show);
 router.post('/customers', CustomerController.store);
 router.put('/customers/:id', CustomerController.update);
 router.delete('/customers/:id', CustomerController.delete);
+
+// ORDER
+router.get('/orders', OrderController.index);
+router.get('/orders/:id', OrderController.show);
+router.post('/orders', authenticate, OrderController.store);
+router.put('/orders/:id', OrderController.update);
+router.delete('/orders/:id', OrderController.delete);
 
 // ORDER STATUS
 router.get('/order-status', OrderStatusController.index);

@@ -2,7 +2,9 @@
 
 const { Model, DataTypes } = require('sequelize');
 
-class commission extends Model {
+// TODO: COMMISSAO DEPENDE DA ROLE DO USUARIO
+// EXEMPLO: REPRESENTANTE 10% && PREPOSTO 6%
+class Commission extends Model {
   static init(sequelize) {
     super.init({
       name: DataTypes.STRING,
@@ -12,9 +14,9 @@ class commission extends Model {
   }
 
   static associate(models) {
-    // define association here
     this.hasMany(models.ProductPrice, { foreignKey: 'commission_id', as: 'commission' });
+    this.hasMany(models.ProductPrice, { foreignKey: 'commission_id', as: 'order_commission' });
   }
 }
 
-module.exports = commission;
+module.exports = Commission;

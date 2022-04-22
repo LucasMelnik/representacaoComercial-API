@@ -9,6 +9,10 @@ class OrderStatus extends Model {
       tableName: 'order_status',
     });
   }
+
+  static associate(models) {
+    this.hasMany(models.Order, { foreignKey: 'order_status_id', as: 'order_status' });
+  }
 }
 
 module.exports = OrderStatus;

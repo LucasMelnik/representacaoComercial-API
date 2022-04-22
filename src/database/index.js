@@ -15,6 +15,7 @@ const Permission = require('../app/models/Permission');
 const PaymentCondition = require('../app/models/PaymentCondition');
 const Factory = require('../app/models/Factory');
 const OrderStatus = require('../app/models/OrderStatus');
+const Order = require('../app/models/Order');
 
 const connection = new Sequelize(dbConfig);
 
@@ -32,6 +33,7 @@ RefreshToken.init(connection);
 Permission.init(connection);
 Factory.init(connection);
 OrderStatus.init(connection);
+Order.init(connection);
 
 Role.associate(connection.models);
 User.associate(connection.models);
@@ -44,5 +46,8 @@ RefreshToken.associate(connection.models);
 Permission.associate(connection.models);
 Factory.associate(connection.models);
 PaymentCondition.associate(connection.models);
+Customer.associate(connection.models);
+Order.associate(connection.models);
+OrderStatus.associate(connection.models);
 
 module.exports = connection;

@@ -15,7 +15,7 @@ class ProductPrice extends Model {
     // define association here
     this.belongsTo(models.PaymentCondition, { foreignKey: 'payment_condition_id', as: 'payment_condition' });
     this.belongsTo(models.Product, { foreignKey: 'product_id', as: 'product' });
-    this.belongsTo(models.commission, { foreignKey: 'commission_id', as: 'commission' });
+    this.belongsTo(models.Commission, { foreignKey: 'commission_id', as: 'commission' });
   }
 }
 
