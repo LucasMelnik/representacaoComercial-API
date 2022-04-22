@@ -24,5 +24,9 @@ class Customer extends Model {
       sequelize,
     });
   }
+
+  static associate(models) {
+    this.hasMany(models.Order, { foreignKey: 'customer_id', as: 'customer' });
+  }
 }
 module.exports = Customer;

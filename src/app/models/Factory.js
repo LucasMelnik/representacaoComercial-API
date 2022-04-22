@@ -15,6 +15,7 @@ class Factory extends Model {
 
   static associate(models) {
     this.hasMany(models.Product, { foreignKey: 'factory_id', as: 'factory' });
+    this.hasMany(models.Order, { foreignKey: 'factory_id', as: 'order_factory' });
   }
 }
 

@@ -13,6 +13,7 @@ class PaymentCondition extends Model {
 
   static associate(models) {
     this.hasMany(models.ProductPrice, { foreignKey: 'payment_condition_id', as: 'payment_condition' });
+    this.hasMany(models.ProductPrice, { foreignKey: 'payment_condition_id', as: 'payment_conditions' });
   }
 }
 module.exports = PaymentCondition;

@@ -24,6 +24,7 @@ class User extends Model {
     this.hasMany(models.RefreshToken, { foreignKey: 'user_id', as: 'user' });
     this.belongsToMany(models.Role, { foreignKey: 'user_id', through: 'user_roles', as: 'roles' });
     this.belongsToMany(models.Permission, { foreignKey: 'user_id', through: 'user_permissions', as: 'permissions' });
+    this.hasMany(models.Order, { foreignKey: 'user_id', as: 'seller' });
   }
 }
 

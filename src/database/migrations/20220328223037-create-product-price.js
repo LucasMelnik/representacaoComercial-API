@@ -17,19 +17,19 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: { model: 'payment_conditions', key: 'id' },
         onUpdate: 'CASCADE',
-        OnDelete: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       product_id: {
         type: Sequelize.INTEGER,
         references: { model: 'products', key: 'id' },
         onUpdate: 'CASCADE',
-        OnDelete: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       commission_id: {
         type: Sequelize.INTEGER,
         references: { model: 'commissions', key: 'id' },
         onUpdate: 'CASCADE',
-        OnDelete: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       created_at: {
         allowNull: false,
