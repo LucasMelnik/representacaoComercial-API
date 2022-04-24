@@ -1,5 +1,10 @@
 const Order = require('../models/Order');
 const User = require('../models/User');
+const Customer = require('../models/Customer');
+const Factory = require('../models/Factory');
+const PaymentCondition = require('../models/PaymentCondition');
+const Commission = require('../models/Commission');
+const OrderStatus = require('../models/OrderStatus');
 
 module.exports = {
   async index(req, res) {
@@ -11,6 +16,7 @@ module.exports = {
         { association: 'factory', attributes: ['fantasy_name'] },
         { association: 'payment_conditions', attributes: ['name'] },
         { association: 'commission', attributes: ['name'] },
+        { association: 'status', attributes: ['name'] },
       ],
 
     });
@@ -29,6 +35,7 @@ module.exports = {
         { association: 'factory', attributes: ['fantasy_name'] },
         { association: 'payment_conditions', attributes: ['name'] },
         { association: 'commission', attributes: ['name'] },
+        { association: 'status', attributes: ['name'] },
       ],
     });
 
@@ -38,7 +45,7 @@ module.exports = {
 
     return res.json(order);
   },
-
+  // TODO: VERIFY IF ATRIBUTES EXISTS
   async store(req, res) {
     const {
       customer_id, factory_id, payment_conditions_id, commission_id,
@@ -66,6 +73,31 @@ module.exports = {
       return res.status(400).json({ error: 'order_date is required!' });
     }
 
+    const customerExists = await Customer.findByPk(customer_id);
+    if (!customerExists) {
+      return res.status(400).json({ error: `Not found customer by id: ${customer_id}` });
+    }
+
+    const userExists = await User.findByPk(user_id);
+    if (!userExists) {
+      return res.status(400).json({ error: `Not found user by id: ${user_id}` });
+    }
+
+    const factoryExists = await Factory.findByPk(factory_id);
+    if (!factoryExists) {
+      return res.status(400).json({ error: `Not found factory by id: ${factory_id}` });
+    }
+
+    const paymentConditionExists = await PaymentCondition.findByPk(payment_conditions_id);
+    if (!paymentConditionExists) {
+      return res.status(400).json({ error: `Not found payment conditions by id: ${payment_conditions_id}` });
+    }
+
+    const commissionExisits = await Commission.findByPk(commission_id);
+    if (!commissionExisits) {
+      return res.status(400).json({ error: `Not found commission by id: ${commission_id}` });
+    }
+
     const order = await Order.create({
       customer_id,
       user_id,
@@ -85,7 +117,7 @@ module.exports = {
     const { id } = req.params;
     const {
       customer_id, user_id, factory_id, payment_conditions_id, commission_id,
-      order_date, delivery_date, comments, discount,
+      order_date, delivery_date, comments, discount, order_status_id,
     } = req.body;
 
     if (!customer_id) {
@@ -108,6 +140,10 @@ module.exports = {
       return res.status(400).json({ error: 'order_date is required!' });
     }
 
+    if (!order_status_id) {
+      return res.status(400).json({ error: 'order_status_id is required!' });
+    }
+
     const order = await Order.findByPk(id);
     if (!order) {
       return res.status(400).json({ error: `Not found order by id: ${id}` });
@@ -116,6 +152,36 @@ module.exports = {
     const seller = await User.findByPk(user_id);
     if (!seller) {
       return res.status(400).json({ error: `Not found seller by id: ${user_id}` });
+    }
+
+    const customerExists = await Customer.findByPk(customer_id);
+    if (!customerExists) {
+      return res.status(400).json({ error: `Not found customer by id: ${customer_id}` });
+    }
+
+    const userExists = await User.findByPk(user_id);
+    if (!userExists) {
+      return res.status(400).json({ error: `Not found user by id: ${user_id}` });
+    }
+
+    const factoryExists = await Factory.findByPk(factory_id);
+    if (!factoryExists) {
+      return res.status(400).json({ error: `Not found factory by id: ${factory_id}` });
+    }
+
+    const paymentConditionExists = await PaymentCondition.findByPk(payment_conditions_id);
+    if (!paymentConditionExists) {
+      return res.status(400).json({ error: `Not found payment conditions by id: ${payment_conditions_id}` });
+    }
+
+    const commissionExisits = await Commission.findByPk(commission_id);
+    if (!commissionExisits) {
+      return res.status(400).json({ error: `Not found commission by id: ${commission_id}` });
+    }
+
+    const statusExists = await OrderStatus.findByPk(order_status_id);
+    if (!statusExists) {
+      return res.status(400).json({ error: `Not found status by id: ${order_status_id}` });
     }
 
     await order.update({
@@ -128,6 +194,7 @@ module.exports = {
       delivery_date,
       comments,
       discount,
+      order_status_id,
     });
 
     return res.json(order);

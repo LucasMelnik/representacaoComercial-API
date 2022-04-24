@@ -11,7 +11,7 @@ class OrderStatus extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Order, { foreignKey: 'order_status_id', as: 'order_status' });
+    this.hasMany(models.Order, { foreignKey: 'order_status_id', as: 'status' });
   }
 }
 
