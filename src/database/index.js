@@ -16,6 +16,7 @@ const PaymentCondition = require('../app/models/PaymentCondition');
 const Factory = require('../app/models/Factory');
 const OrderStatus = require('../app/models/OrderStatus');
 const Order = require('../app/models/Order');
+const OrderItem = require('../app/models/OrderItem');
 
 const connection = new Sequelize(dbConfig);
 
@@ -34,6 +35,7 @@ Permission.init(connection);
 Factory.init(connection);
 OrderStatus.init(connection);
 Order.init(connection);
+OrderItem.init(connection);
 
 Role.associate(connection.models);
 User.associate(connection.models);
@@ -49,5 +51,6 @@ PaymentCondition.associate(connection.models);
 Customer.associate(connection.models);
 Order.associate(connection.models);
 OrderStatus.associate(connection.models);
+OrderItem.associate(connection.models);
 
 module.exports = connection;

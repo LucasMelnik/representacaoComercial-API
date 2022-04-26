@@ -24,6 +24,7 @@ const { can, is } = require('./app/middlewares/PermissionMiddleware');
 const FactoryController = require('./app/controllers/FactoryController');
 const OrderStatusController = require('./app/controllers/OrderStatusController');
 const OrderController = require('./app/controllers/OrderController');
+const OrderItemController = require('./app/controllers/OrderItemController');
 
 const router = Router();
 
@@ -114,6 +115,13 @@ router.get('/orders/:id', OrderController.show);
 router.post('/orders', authenticate, OrderController.store);
 router.put('/orders/:id', OrderController.update);
 router.delete('/orders/:id', OrderController.delete);
+
+// ORDER ITEM
+router.get('/order-items', OrderItemController.index);
+router.get('/order-items/:id', OrderItemController.show);
+router.post('/order-items', OrderItemController.store);
+router.put('/order-items/:id', OrderItemController.update);
+router.delete('/order-items/:id', OrderItemController.delete);
 
 // ORDER STATUS
 router.get('/order-status', OrderStatusController.index);
