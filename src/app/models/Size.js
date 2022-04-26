@@ -8,6 +8,10 @@ class Size extends Model {
       sequelize,
     });
   }
+
+  static associate(models) {
+    this.hasMany(models.OrderItem, { foreignKey: 'size_id', as: 'size' });
+  }
 }
 
 module.exports = Size;
