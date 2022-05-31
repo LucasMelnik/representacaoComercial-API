@@ -1,5 +1,5 @@
 const User = require('../models/User');
-
+// TODO: TIRAR PASSWORD DAS RESPONSES
 module.exports = {
   async index(req, res) {
     const users = await User.findAll();
