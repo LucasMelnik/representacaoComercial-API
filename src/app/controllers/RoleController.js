@@ -3,7 +3,6 @@ const Role = require('../models/Role');
 module.exports = {
   async index(req, res) {
     const roles = await Role.findAll();
-
     return res.json(roles);
   },
 
@@ -32,7 +31,6 @@ module.exports = {
     }
 
     const role = await Role.create({ name });
-
     return res.json(role);
   },
 

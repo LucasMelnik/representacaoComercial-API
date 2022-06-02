@@ -29,7 +29,7 @@ const OrderItemController = require('./app/controllers/OrderItemController');
 const router = Router();
 
 // ROLES
-router.get('/roles', authenticate, RoleController.index);
+router.get('/roles', RoleController.index);
 router.get('/roles/:id', RoleController.show);
 router.post('/roles', RoleController.store);
 router.put('/roles/:id', RoleController.update);
@@ -44,7 +44,7 @@ router.get('/users', authenticate, is('REPRESENTANTE'), UserController.index);
 router.get('/users/:id', UserController.show);
 router.post('/users', authenticate, is('REPRESENTANTE'), UserController.store);
 router.put('/users/:id', UserController.update);
-router.delete('/users/:id', UserController.delete);
+router.delete('/users/:id',authenticate, is('REPRESENTANTE'), UserController.delete);
 // USER ACCESS CONTROLL
 router.post('/users/:id/access-controll', UserAccessControllController.add);
 router.delete('/users/:id/access-controll', UserAccessControllController.remove);
