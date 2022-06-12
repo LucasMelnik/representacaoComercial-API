@@ -5,7 +5,6 @@ const GenerateToken = require('../provider/GenerateToken');
 
 module.exports = {
   async authenticate(req, res) {
-
     const { email, password } = req.body;
 
     const user = await User.findOne({ where: { email } });

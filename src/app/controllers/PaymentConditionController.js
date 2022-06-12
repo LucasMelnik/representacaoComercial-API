@@ -1,4 +1,5 @@
 const PaymentCondition = require('../models/PaymentCondition');
+// TODO: FAZER TABELA AUXILIAR DE N:N
 
 module.exports = {
   async index(req, res) {
