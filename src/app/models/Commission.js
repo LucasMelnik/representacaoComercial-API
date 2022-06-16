@@ -7,7 +7,7 @@ const { Model, DataTypes } = require('sequelize');
 class Commission extends Model {
   static init(sequelize) {
     super.init({
-      name: DataTypes.STRING,
+      name: DataTypes.INTEGER,
     }, {
       sequelize,
     });
@@ -16,6 +16,7 @@ class Commission extends Model {
   static associate(models) {
     this.hasMany(models.ProductPrice, { foreignKey: 'commission_id', as: 'commission' });
     this.hasMany(models.ProductPrice, { foreignKey: 'commission_id', as: 'order_commission' });
+    this.belongsToMany(models.Factory, { foreignKey: 'commission_id', through: 'factory_commissions', as: 'commissions' });
   }
 }
 
