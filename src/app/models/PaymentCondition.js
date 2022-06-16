@@ -14,6 +14,7 @@ class PaymentCondition extends Model {
   static associate(models) {
     this.hasMany(models.ProductPrice, { foreignKey: 'payment_condition_id', as: 'payment_condition' });
     this.hasMany(models.ProductPrice, { foreignKey: 'payment_condition_id', as: 'payment_conditions' });
+    this.belongsToMany(models.Factory, { foreignKey: 'payment_condition_id', through: 'factory_conditions', as: 'factory_payment_conditions' });
   }
 }
 module.exports = PaymentCondition;

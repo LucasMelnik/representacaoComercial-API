@@ -48,17 +48,18 @@ module.exports = {
   // TODO: VERIFY IF ATRIBUTES EXISTS
   async store(req, res) {
     const {
-      customer_id, factory_id, payment_conditions_id, commission_id,
-      order_date, delivery_date, comments, discount,
+      customer, factory, payment_conditions_id, commission_id,
+      order_date, delivery_date, comments, discount, seller_id,
     } = req.body;
-    const user_id = req.userId;
+    // IF THE SELLER IS THE USER AUTHENTICATED, UN COMMENT THE LINE BELOW
+    // const user_id = req.userId
 
-    if (!customer_id) {
-      return res.status(400).json({ error: 'customer_id is required!' });
+    if (!customer) {
+      return res.status(400).json({ error: 'customer is required!' });
     }
 
-    if (!user_id) {
-      return res.status(400).json({ error: 'user_id is required!' });
+    if (!seller_id) {
+      return res.status(400).json({ error: 'seller_id is required!' });
     }
 
     if (!payment_conditions_id) {
@@ -73,19 +74,22 @@ module.exports = {
       return res.status(400).json({ error: 'order_date is required!' });
     }
 
-    const customerExists = await Customer.findByPk(customer_id);
+    const customerExists = await Customer.findOne({ where: { corporate_name: customer } });
+    const customer_id = customerExists.getDataValue('id');
     if (!customerExists) {
-      return res.status(400).json({ error: `Not found customer by id: ${customer_id}` });
+      return res.status(400).json({ error: `Not found customer ${customer}` });
     }
 
-    const userExists = await User.findByPk(user_id);
+    const userExists = await User.findByPk(seller_id);
+    const user_id = userExists.getDataValue('id');
     if (!userExists) {
-      return res.status(400).json({ error: `Not found user by id: ${user_id}` });
+      return res.status(400).json({ error: `Not found user by id: ${seller_id}` });
     }
 
-    const factoryExists = await Factory.findByPk(factory_id);
+    const factoryExists = await Factory.findOne({ where: { fantasy_name: factory } });
+    const factory_id = factoryExists.getDataValue('id');
     if (!factoryExists) {
-      return res.status(400).json({ error: `Not found factory by id: ${factory_id}` });
+      return res.status(400).json({ error: `Not found factory ${factory}` });
     }
 
     const paymentConditionExists = await PaymentCondition.findByPk(payment_conditions_id);

@@ -40,11 +40,11 @@ router.post('/roles/:id/permissions', authenticate, is('REPRESENTANTE'), RolePer
 router.delete('/roles/:id/permissions', authenticate, is(['REPRESENTANTE']), RolePermissionController.remove);
 
 // USERS
-router.get('/users', authenticate, is('REPRESENTANTE'), UserController.index);
+router.get('/users', UserController.index);
 router.get('/users/:id', UserController.show);
 router.post('/users', authenticate, is('REPRESENTANTE'), UserController.store);
 router.put('/users/:id', UserController.update);
-router.delete('/users/:id',authenticate, is('REPRESENTANTE'), UserController.delete);
+router.delete('/users/:id', authenticate, is('REPRESENTANTE'), UserController.delete);
 // USER ACCESS CONTROLL
 router.post('/users/:id/access-controll', UserAccessControllController.add);
 router.delete('/users/:id/access-controll', UserAccessControllController.remove);
@@ -112,7 +112,7 @@ router.delete('/customers/:id', CustomerController.delete);
 // ORDER
 router.get('/orders', OrderController.index);
 router.get('/orders/:id', OrderController.show);
-router.post('/orders', authenticate, OrderController.store);
+router.post('/orders', OrderController.store); // IF THE SELLER IS THE USER AUTHENTICATED, SET AUTHENTICATED METHOD
 router.put('/orders/:id', OrderController.update);
 router.delete('/orders/:id', OrderController.delete);
 
@@ -137,6 +137,7 @@ router.post('/payment-condition', PaymentConditionController.store);
 router.put('/payment-condition/:id', PaymentConditionController.update);
 router.delete('/payment-condition/:id', PaymentConditionController.delete);
 
+// FACTORY
 router.get('/factories', FactoryController.index);
 router.get('/factories/:id', FactoryController.show);
 router.post('/factories', FactoryController.store);
