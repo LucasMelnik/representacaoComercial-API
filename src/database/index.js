@@ -17,6 +17,7 @@ const Factory = require('../app/models/Factory');
 const OrderStatus = require('../app/models/OrderStatus');
 const Order = require('../app/models/Order');
 const OrderItem = require('../app/models/OrderItem');
+const ProductSize = require('../app/models/ProductSize');
 
 const connection = new Sequelize(dbConfig);
 
@@ -36,7 +37,9 @@ Factory.init(connection);
 OrderStatus.init(connection);
 Order.init(connection);
 OrderItem.init(connection);
+ProductSize.init(connection);
 
+ProductSize.associate(connection.models);
 Role.associate(connection.models);
 User.associate(connection.models);
 AgeGroup.associate(connection.models);

@@ -1,4 +1,6 @@
 const Product = require('../models/Product');
+const ProductSize = require('../models/ProductSize');
+const Size = require('../models/Size');
 
 module.exports = {
   async index(req, res) {
@@ -116,5 +118,26 @@ module.exports = {
     await product.destroy();
 
     return res.json(`Product ${product.id} was successfully deleted.`);
+  },
+
+  async addSize(req, res) {
+    const { id } = req.params;
+    const { size_id } = req.body;
+
+    const product = await Product.findByPk(id);
+
+    if (!product) {
+      return res.status(400).json({ error: `Not found product by id: ${id}.` });
+    }
+
+    const size = await Size.findByPk(id);
+
+    if (!size) {
+      return res.status(400).json({ error: `Not found size by id: ${size_id}` });
+    }
+
+    const productSize = await ProductSize.create({ product_id: id, size_id });
+
+    return res.json(productSize);
   },
 };

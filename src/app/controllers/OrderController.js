@@ -30,7 +30,7 @@ module.exports = {
     const order = await Order.findByPk(id, {
       attributes: ['id', 'order_date', 'delivery_date', 'comments', 'discount', 'createdAt', 'updatedAt'],
       include: [
-        { association: 'customer', attributes: ['corporate_name'] },
+        { association: 'customer', attributes: ['id', 'corporate_name'] },
         { association: 'seller', attributes: ['nickname'] },
         { association: 'factory', attributes: ['fantasy_name'] },
         { association: 'payment_conditions', attributes: ['name'] },

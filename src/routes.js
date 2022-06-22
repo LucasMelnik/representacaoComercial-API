@@ -80,6 +80,7 @@ router.get('/products/:id', ProductController.show);
 router.post('/products', ProductController.store);
 router.put('/products/:id', ProductController.update);
 router.delete('/products/:id', ProductController.delete);
+router.post('/products/:id/sizes', ProductController.addSize);
 
 // COMMISSIONS
 router.get('/commissions', CommissionController.index);
