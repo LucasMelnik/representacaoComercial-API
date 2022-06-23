@@ -2,7 +2,11 @@ const Size = require('../models/Size');
 
 module.exports = {
   async index(req, res) {
-    const sizes = await Size.findAll();
+    const sizes = await Size.findAll({
+      order: [
+        ['name', 'ASC'],
+      ],
+    });
 
     return res.json(sizes);
   },
