@@ -13,7 +13,6 @@ class Product extends Model {
       comments: DataTypes.TEXT,
     }, {
       sequelize,
-      modelName: 'Product',
     });
   }
 
@@ -23,7 +22,6 @@ class Product extends Model {
     this.belongsTo(models.Gender, { foreignKey: 'gender_id', as: 'gender' });
     this.belongsTo(models.Factory, { foreignKey: 'factory_id', as: 'factory' });
     this.hasMany(models.ProductPrice, { foreignKey: 'product_id', as: 'product' });
-    this.belongsToMany(models.Size, { foreignKey: 'product_id', through: 'product_sizes', as: 'products' });
   }
 }
 

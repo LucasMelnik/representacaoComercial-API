@@ -17,7 +17,6 @@ const Factory = require('../app/models/Factory');
 const OrderStatus = require('../app/models/OrderStatus');
 const Order = require('../app/models/Order');
 const OrderItem = require('../app/models/OrderItem');
-const ProductSize = require('../app/models/ProductSize');
 
 const connection = new Sequelize(dbConfig);
 
@@ -27,24 +26,23 @@ Customer.init(connection);
 AgeGroup.init(connection);
 Gender.init(connection);
 Product.init(connection);
+Size.init(connection);
 Commission.init(connection);
 ProductPrice.init(connection);
 PaymentCondition.init(connection);
-Size.init(connection);
 RefreshToken.init(connection);
 Permission.init(connection);
 Factory.init(connection);
 OrderStatus.init(connection);
 Order.init(connection);
 OrderItem.init(connection);
-ProductSize.init(connection);
 
-ProductSize.associate(connection.models);
 Role.associate(connection.models);
 User.associate(connection.models);
 AgeGroup.associate(connection.models);
 Gender.associate(connection.models);
 Product.associate(connection.models);
+Size.associate(connection.models);
 Commission.associate(connection.models);
 ProductPrice.associate(connection.models);
 RefreshToken.associate(connection.models);

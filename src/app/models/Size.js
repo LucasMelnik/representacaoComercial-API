@@ -11,7 +11,6 @@ class Size extends Model {
 
   static associate(models) {
     this.hasMany(models.OrderItem, { foreignKey: 'size_id', as: 'size' });
-    this.belongsToMany(models.Product, { foreignKey: 'size_id', through: 'product_sizes', as: 'sizes' });
   }
 }
 
