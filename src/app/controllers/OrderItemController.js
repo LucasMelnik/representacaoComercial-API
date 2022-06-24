@@ -17,27 +17,25 @@ module.exports = {
   },
 
   async show(req, res) {
-    const { id } = req.params;
+    const { order_id } = req.params;
 
-    const orderItem = await OrderItem.findByPk(id, {
-      attributes: ['id', 'quantity', 'createdAt', 'updatedAt', 'order_id'],
+    const orderItems = await OrderItem.findAll({
+      where: { order_id },
       include: [
-        { association: 'product_price', attributes: ['price'], include: { association: 'product', attributes: ['ref', 'color', 'image_path'] } },
+        { association: 'product_price', attributes: ['price'], include: { association: 'product', attributes: ['ref', 'color'] } },
         { association: 'size', attributes: ['name'] },
       ],
     });
 
-    if (!orderItem) {
-      return res.status(404).json({ error: `Not found order item by id: ${id}` });
-    }
-
-    return res.json(orderItem);
+    return res.json(orderItems);
   },
 
   async store(req, res) {
     const {
       order_id, product_price_id, size_id, quantity,
     } = req.body;
+
+    // console.log(order_id, product_price_id, size_id, quantity);
 
     if (!order_id) {
       return res.status(400).json({ error: 'Order id is required' });
