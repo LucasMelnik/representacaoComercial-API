@@ -17,6 +17,7 @@ const Factory = require('../app/models/Factory');
 const OrderStatus = require('../app/models/OrderStatus');
 const Order = require('../app/models/Order');
 const OrderItem = require('../app/models/OrderItem');
+const Colors = require('../app/models/Colors');
 
 const connection = new Sequelize(dbConfig);
 
@@ -36,6 +37,7 @@ Factory.init(connection);
 OrderStatus.init(connection);
 Order.init(connection);
 OrderItem.init(connection);
+Colors.init(connection);
 
 Role.associate(connection.models);
 User.associate(connection.models);
@@ -53,5 +55,6 @@ Customer.associate(connection.models);
 Order.associate(connection.models);
 OrderStatus.associate(connection.models);
 OrderItem.associate(connection.models);
+Colors.associate(connection.models);
 
 module.exports = connection;

@@ -27,7 +27,7 @@ module.exports = {
       return res.status(400).json({ error: 'Commission is required!' });
     }
 
-    const [commissionExists] = await Commission.findAll({ where: { name } });
+    const [commissionExists] = await Commission.findAll({ where: { name : name } });
     if (commissionExists) {
       return res.status(400).json({ error: `Commission ${name} already exists!` });
     }
@@ -40,7 +40,6 @@ module.exports = {
   async update(req, res) {
     const { id } = req.params;
     const { name } = req.body;
-
     if (!name) {
       return res.status(400).json({ error: 'Name is required!' });
     }
@@ -50,7 +49,7 @@ module.exports = {
       return res.status(400).json({ error: `Not found commission by id: ${id}.` });
     }
 
-    const [commissionExists] = await Commission.findAll({ where: { name } });
+    const [commissionExists] = await Commission.findAll({ where: { name : name } });
     if (commissionExists) {
       return res.status(400).json({ error: `Commission ${name} already exists!` });
     }
