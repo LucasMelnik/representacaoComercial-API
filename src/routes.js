@@ -80,6 +80,7 @@ router.get('/products/:id', ProductController.show);
 router.post('/products', ProductController.store);
 router.put('/products/:id', ProductController.update);
 router.delete('/products/:id', ProductController.delete);
+router.get('/factories/:id/products', ProductController.showByFactory);
 
 // COMMISSIONS
 router.get('/commissions', CommissionController.index);
@@ -90,7 +91,7 @@ router.delete('/commissions/:id', CommissionController.delete);
 
 // PRODUCT PRICES
 router.get('/product-prices', ProductPriceController.index);
-router.get('/product-prices/:id', ProductPriceController.show);
+router.get('/product-prices/:commission_id/:payment_condition_id/:product_id', ProductPriceController.show);
 router.post('/product-prices', ProductPriceController.store);
 router.put('/product-prices/:id', ProductPriceController.update);
 router.delete('/product-prices/:id', ProductPriceController.delete);
@@ -118,7 +119,7 @@ router.delete('/orders/:id', OrderController.delete);
 
 // ORDER ITEM
 router.get('/order-items', OrderItemController.index);
-router.get('/order-items/:id', OrderItemController.show);
+router.get('/order-items/:order_id', OrderItemController.show);
 router.post('/order-items', OrderItemController.store);
 router.put('/order-items/:id', OrderItemController.update);
 router.delete('/order-items/:id', OrderItemController.delete);

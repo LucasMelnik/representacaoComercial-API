@@ -78,6 +78,14 @@ module.exports = {
     return res.json(product);
   },
 
+  async showByFactory(req, res) {
+    const { id } = req.params;
+
+    const products = await Product.findAll({ where: { factory_id: id } });
+
+    return res.json(products);
+  },
+
   async update(req, res) {
     const { id } = req.params;
     const {

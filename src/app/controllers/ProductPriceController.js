@@ -28,12 +28,16 @@ module.exports = {
   },
 
   async show(req, res) {
-    const { id } = req.params;
+    const { commission_id, payment_condition_id, product_id } = req.params;
 
-    const productPrice = await ProductPrice.findByPk(id);
+    const productPrice = await ProductPrice.findOne({
+      where: {
+        commission_id, payment_condition_id, product_id,
+      },
+    });
 
     if (!productPrice) {
-      return res.status(400).json({ error: `Not found productPrice by id: ${id}.` });
+      return res.status(400).json({ error: 'Not found productPrice' });
     }
 
     return res.json(productPrice);
