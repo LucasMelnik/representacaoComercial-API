@@ -32,9 +32,9 @@ module.exports = {
       include: [
         { association: 'customer', attributes: ['id', 'corporate_name'] },
         { association: 'seller', attributes: ['nickname'] },
-        { association: 'factory', attributes: ['fantasy_name'] },
-        { association: 'payment_conditions', attributes: ['name'] },
-        { association: 'commission', attributes: ['name'] },
+        { association: 'factory', attributes: ['id', 'fantasy_name'] },
+        { association: 'payment_conditions', attributes: ['id', 'name'] },
+        { association: 'commission', attributes: ['id', 'name'] },
         { association: 'status', attributes: ['name'] },
       ],
     });
