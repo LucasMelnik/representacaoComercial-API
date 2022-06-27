@@ -5,7 +5,7 @@ const ProductPrice = require('../models/ProductPrice');
 module.exports = {
   async index(req, res) {
     const products = await Product.findAll({
-      include: ['gender', 'ageGroup', 'factory'],
+      include: ['gender', 'ageGroup', 'factory', 'colors'],
     });
 
     return res.json(products);
@@ -63,7 +63,7 @@ module.exports = {
     const { id } = req.params;
 
     const product = await Product.findByPk(id, {
-      include: ['gender', 'ageGroup', 'factory'],
+      include: ['gender', 'ageGroup', 'factory', 'colors'],
     });
 
     if (!product) {
