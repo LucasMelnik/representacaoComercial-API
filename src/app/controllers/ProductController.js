@@ -1,11 +1,24 @@
+const { Op } = require('sequelize');
 const Colors = require('../models/Colors');
 const Product = require('../models/Product');
 const ProductPrice = require('../models/ProductPrice');
 
 module.exports = {
   async index(req, res) {
+    const { factory_id, ref } = req.query;
+
+    let whereCondition = {
+      ...(factory_id && factory_id.length && {factory_id}), 
+      ...(ref && ref.length && {
+        'ref': {
+          [Op.like]: `%${ref}%`, 
+        }
+      }), 
+    };
+    console.log(whereCondition);
     const products = await Product.findAll({
       include: ['gender', 'ageGroup', 'factory', 'colors'],
+      where: whereCondition 
     });
 
     return res.json(products);
