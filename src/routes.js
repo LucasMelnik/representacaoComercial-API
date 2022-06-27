@@ -68,7 +68,7 @@ router.put('/genders/:id', GenderController.update);
 router.delete('/genders/:id', GenderController.delete);
 
 // AGE GROUPS
-router.get('/age-groups', authenticate, AgeGroupController.index);
+router.get('/age-groups', AgeGroupController.index);
 router.get('/age-groups/:id', AgeGroupController.show);
 router.post('/age-groups', AgeGroupController.store);
 router.put('/age-groups/:id', AgeGroupController.update);

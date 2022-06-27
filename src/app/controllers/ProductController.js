@@ -25,7 +25,6 @@ module.exports = {
     if (!colors.length) {
       return res.status(400).json({ error: 'Color is required!' });
     }
-    
 
     if (!factory_id) {
       return res.status(400).json({ error: 'factory_id is required!' });
@@ -45,22 +44,18 @@ module.exports = {
     }
 
     const product = await Product.create({
-      ref, color:"jorge", image_path, factory_id, cost, comments, age_id, gender_id,
+      ref, color: 'jorge', image_path, factory_id, cost, comments, age_id, gender_id,
     });
-    const colorsObj = colors.map((color) => {
-      return {name: color, product_id: product.getDataValue('id')};
-    })
-    const productPriceObj = productPrices.map((productPrice) => {
-      return {
-        price: productPrice.price,
-        payment_condition_id: productPrice.condition_id,
-        commission_id: productPrice.commission_id,
-        product_id: product.getDataValue('id')
-      };
-    })
-    Colors.bulkCreate(colorsObj, { ignoreDuplicates: true, });
-    ProductPrice.bulkCreate(productPriceObj, { ignoreDuplicates: true, });
-    
+    const colorsObj = colors.map((color) => ({ name: color, product_id: product.getDataValue('id') }));
+    const productPriceObj = productPrices.map((productPrice) => ({
+      price: productPrice.price,
+      payment_condition_id: productPrice.condition_id,
+      commission_id: productPrice.commission_id,
+      product_id: product.getDataValue('id'),
+    }));
+    Colors.bulkCreate(colorsObj, { ignoreDuplicates: true });
+    ProductPrice.bulkCreate(productPriceObj, { ignoreDuplicates: true });
+
     return res.json(product);
   },
 

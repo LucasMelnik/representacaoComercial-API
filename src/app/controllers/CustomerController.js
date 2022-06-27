@@ -2,7 +2,12 @@ const Customer = require('../models/Customer');
 
 module.exports = {
   async index(req, res) {
-    const customers = await Customer.findAll();
+    const customers = await Customer.findAll({
+      order: [
+
+        ['corporate_name', 'ASC'],
+      ],
+    });
 
     return res.json(customers);
   },
