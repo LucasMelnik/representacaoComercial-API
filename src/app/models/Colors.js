@@ -14,6 +14,7 @@ class Colors extends Model {
   static associate(models) {
     // define association here
     this.belongsTo(models.Product, { foreignKey: 'product_id', as: 'product' });
+    this.hasMany(models.OrderItem, { foreignKey: 'color_id', as: 'color' });
   }
 }
 

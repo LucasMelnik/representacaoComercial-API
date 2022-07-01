@@ -7,18 +7,18 @@ module.exports = {
   async index(req, res) {
     const { factory_id, ref } = req.query;
 
-    let whereCondition = {
-      ...(factory_id && factory_id.length && {factory_id}), 
+    const whereCondition = {
+      ...(factory_id && factory_id.length && { factory_id }),
       ...(ref && ref.length && {
-        'ref': {
-          [Op.like]: `%${ref}%`, 
-        }
-      }), 
+        ref: {
+          [Op.like]: `%${ref}%`,
+        },
+      }),
     };
     console.log(whereCondition);
     const products = await Product.findAll({
       include: ['gender', 'ageGroup', 'factory', 'colors'],
-      where: whereCondition 
+      where: whereCondition,
     });
 
     return res.json(products);
@@ -89,7 +89,7 @@ module.exports = {
   async showByFactory(req, res) {
     const { id } = req.params;
 
-    const products = await Product.findAll({ where: { factory_id: id } });
+    const products = await Product.findAll({ where: { factory_id: id }, include: ['gender', 'ageGroup', 'factory', 'colors'] });
 
     return res.json(products);
   },

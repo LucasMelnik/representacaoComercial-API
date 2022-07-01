@@ -25,6 +25,7 @@ const FactoryController = require('./app/controllers/FactoryController');
 const OrderStatusController = require('./app/controllers/OrderStatusController');
 const OrderController = require('./app/controllers/OrderController');
 const OrderItemController = require('./app/controllers/OrderItemController');
+const ColorsController = require('./app/controllers/ColorsController');
 
 const router = Router();
 
@@ -81,6 +82,11 @@ router.post('/products', ProductController.store);
 router.put('/products/:id', ProductController.update);
 router.delete('/products/:id', ProductController.delete);
 router.get('/factories/:id/products', ProductController.showByFactory);
+
+// COLORS
+router.get('/colors/:product_id', ColorsController.getColorsByProduct);
+router.get('/color/:id', ColorsController.show);
+router.get('/colors', ColorsController.index);
 
 // COMMISSIONS
 router.get('/commissions', CommissionController.index);

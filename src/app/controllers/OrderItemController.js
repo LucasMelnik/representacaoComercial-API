@@ -32,10 +32,8 @@ module.exports = {
 
   async store(req, res) {
     const {
-      order_id, product_price_id, size_id, quantity,
+      order_id, product_price_id, size_id, quantity, color_id,
     } = req.body;
-
-    // console.log(order_id, product_price_id, size_id, quantity);
 
     if (!order_id) {
       return res.status(400).json({ error: 'Order id is required' });
@@ -51,6 +49,10 @@ module.exports = {
 
     if (!size_id) {
       return res.status(400).json({ error: 'Size id is required' });
+    }
+
+    if (!color_id) {
+      return res.status(400).json({ error: 'Color id is required' });
     }
 
     const orderExists = await Order.findByPk(order_id);
@@ -69,7 +71,7 @@ module.exports = {
     }
 
     const orderItem = await OrderItem.create({
-      order_id, product_price_id, quantity, size_id,
+      order_id, product_price_id, quantity, size_id, color_id,
     });
 
     return res.json(orderItem);
